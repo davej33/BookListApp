@@ -4,4 +4,6 @@
     <string name="search_button">Search!</string>
     <string name="empty">No results</string>
     <string name="connection_fail">No internet connection</string>
+    <string name="title">Title: </string>
+    <string name="author">Author: </string>
 </resources>

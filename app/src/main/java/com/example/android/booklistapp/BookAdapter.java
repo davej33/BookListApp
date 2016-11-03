@@ -33,8 +33,29 @@ public class BookAdapter extends ArrayAdapter<Book> {
         title.setText(currentBook.getmTitle());
 
         TextView author = (TextView) listItemView.findViewById(R.id.author);
-        author.setText(currentBook.getmAuthor());
+        author.setText(removePunctuation(currentBook.getmAuthor()));
 
         return listItemView;
     }
+
+    private String removePunctuation(String author) {
+        // convert string to character array
+        char[] stringToChar = author.toCharArray(); // "[", '"", "a', "u"]
+
+        StringBuilder ss = new StringBuilder();
+
+        // interate through each char[] element
+        for (int i = 1; i < (stringToChar.length - 1); i++) {
+            String s = Character.toString(stringToChar[i]);
+
+            if (s.matches("\"")) {
+                continue;
+            }
+            ss.append(s);
+        }
+
+        return ss.toString();
+
+    }
 }
+
