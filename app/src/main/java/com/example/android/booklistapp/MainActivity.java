@@ -103,10 +103,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             mEmptyTextView.setText("empty");
         }
+        Log.v(LOG_TAG, "LoaderFinished");
     }
 
     @Override
     public void onLoaderReset(Loader<List<Book>> loader) {
-        mAdapter.clear();
+
+     mAdapter.clear();
     }
 }
