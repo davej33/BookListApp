@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     loaderManager.initLoader(0, null, MainActivity.this);
                     mProgressBar.setVisibility(View.VISIBLE);
                 } else {
-                    View loadingIndicator = findViewById(R.id.progress_bar);
-                    loadingIndicator.setVisibility(View.GONE);
+
+                    mProgressBar.setVisibility(View.GONE);
 
                     // Update empty state with no connection error message
                     mEmptyTextView.setText(R.string.empty);
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
         } else {
-            mEmptyTextView.setText(R.string.empty);
+            mEmptyTextView.setText("empty");
         }
     }
 

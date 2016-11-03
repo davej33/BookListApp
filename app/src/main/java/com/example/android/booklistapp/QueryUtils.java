@@ -99,13 +99,9 @@ public class QueryUtils {
                 JSONObject element = items.getJSONObject(i);
                 JSONObject info = element.getJSONObject("volumeInfo");
 
-                String title = "title";
-                String author = "author";
-                String url = "url";
-               /* String title = info.getString("title");
-                String author = info.getString("title");
-                JSONObject itemsObj = root.getJSONObject("items");
-                String url = itemsObj.getString("selfLink");*/
+                String title = info.getString("title");
+                String url = element.getString("selfLink");
+                String author = info.getString("authors");
 
                 Book book = new Book(title, author, url);
 
