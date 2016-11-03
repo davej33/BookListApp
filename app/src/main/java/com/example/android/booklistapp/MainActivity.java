@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent listActivity = new Intent(MainActivity.this, com.example.android.booklistapp.ListActivity.class);
                 startActivity(listActivity);
-
-
             }
         });
     }
