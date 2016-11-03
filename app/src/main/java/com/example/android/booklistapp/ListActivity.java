@@ -34,20 +34,26 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
 
-
+        // create list view object
         ListView listView = (ListView) findViewById(R.id.list_view);
 
+        // use search parameters to create searchable URL
         String mAPIurl = "https://www.googleapis.com/books/v1/volumes?q=";
         String mSearchParams = MainActivity.search_input.getText().toString();
         mSearchUrl = mAPIurl + mSearchParams;
 
+        // initialize progress bar view
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
+        // initialize empty text view
         mEmptyTextView = (TextView) findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyTextView);
 
+        // initialize adapter as empty array list of Book objects
         mAdapter = new BookAdapter(this, new ArrayList<Book>());
         listView.setAdapter(mAdapter);
+
+        // add onClick. takes user to json item page with more info
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -58,20 +64,19 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
+        // create ConnectivityManager and NetworkInfo to test network connectivity
         ConnectivityManager cnnMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         NetworkInfo networkInfo = cnnMgr.getActiveNetworkInfo();
 
+        // conditional responses to connectivity state
         if (networkInfo != null && networkInfo.isConnected()) {
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(0, null, this);
             mProgressBar.setVisibility(View.VISIBLE);
-
         } else {
-
             mProgressBar.setVisibility(View.GONE);
 
-            // Update empty state with no connection error message
+            // Update empty state with no connection message
             mEmptyTextView.setText(R.string.connection_fail);
         }
     }
@@ -88,6 +93,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mProgressBar.setVisibility(View.GONE);
 
+        // display data in adapter if results found, otherwise return no results
         if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
         } else {

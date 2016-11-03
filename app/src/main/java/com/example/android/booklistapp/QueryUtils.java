@@ -22,21 +22,30 @@ import java.util.List;
 
 public class QueryUtils {
 
+    // set LOG_TAG constant
     public static final String LOG_TAG = MainActivity.class.getName();
 
+    // retrieve requested data
     public static List<Book> fetchData(String urlString) {
+
+        // convert url string to URL object
         URL url = createURL(urlString);
         String jsonResponse = "";
-        Log.v(LOG_TAG, "url" + url);
+
+        // run url and store results in string
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
             Log.e(LOG_TAG, "http request error", e);
         }
+
+        // filter for required data and store in List
         List<Book> bookList = extractData(jsonResponse);
+
         return bookList;
     }
 
+    // convert url
     private static URL createURL(String urlString) {
         URL url = null;
         try {
@@ -47,6 +56,7 @@ public class QueryUtils {
         return url;
     }
 
+    // http request
     private static String makeHttpRequest(URL url) throws IOException {
         HttpURLConnection urlConnection = null;
         InputStream inputStream;
@@ -67,6 +77,7 @@ public class QueryUtils {
         return jsonResponse;
     }
 
+    // stream reader
     private static String readFromStream(InputStream inputStream) {
         StringBuilder output = new StringBuilder();
 
@@ -84,6 +95,7 @@ public class QueryUtils {
         return output.toString();
     }
 
+    // filter data
     private static List<Book> extractData(String data) {
 
         List<Book> bookList = new ArrayList<>();

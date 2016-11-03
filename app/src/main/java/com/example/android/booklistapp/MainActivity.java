@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    // global variable storing search input
     public static EditText search_input = null;
 
     @Override
@@ -17,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // initialize input view
         search_input = (EditText) findViewById(R.id.search_parameter);
 
+        // initialize search button and start ListActivity when clicked
         Button searchButton = (Button) findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

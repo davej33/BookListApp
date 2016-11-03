@@ -14,8 +14,10 @@ import static com.example.android.booklistapp.QueryUtils.LOG_TAG;
 
 public class BookAsyncTaskLoader extends AsyncTaskLoader {
 
+    // url variable
     private String mUrl;
 
+    // constructor
     public BookAsyncTaskLoader(Context context, String url) {
         super(context);
         mUrl = url;
@@ -27,6 +29,7 @@ public class BookAsyncTaskLoader extends AsyncTaskLoader {
         forceLoad();
     }
 
+    // run network request on background thread
     @Override
     public List<Book> loadInBackground() {
         List<Book> bookList = QueryUtils.fetchData(mUrl);
