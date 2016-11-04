@@ -113,8 +113,12 @@ public class QueryUtils {
 
                 String title = info.getString("title");
                 String url = element.getString("selfLink");
-                String author = info.getString("authors");
-
+                String author = "";
+                if (info.has("authors")) {
+                    author = info.getString("authors");
+                } else {
+                    author = " No author provided ";
+                }
                 Book book = new Book(title, author, url);
 
                 bookList.add(book);

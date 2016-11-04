@@ -7,8 +7,8 @@ import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,15 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         // use search parameters to create searchable URL
         String mAPIurl = "https://www.googleapis.com/books/v1/volumes?q=";
         String mSearchParams = MainActivity.search_input.getText().toString();
-        mSearchUrl = mAPIurl + mSearchParams;
+        String paramsEncoded = "";
+
+        try {
+            paramsEncoded = URLEncoder.encode(mSearchParams, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            Log.e(LOG_TAG, "Unsupported encoding error", e);
+        }
+
+        mSearchUrl = mAPIurl + paramsEncoded;
 
         // initialize progress bar view
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
